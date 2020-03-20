@@ -8,11 +8,21 @@
 
 import UIKit
 
+struct Item{
+    let name: String
+    let price: Double
+    var quantity: Double = 0
+    
+    func totalPrice() -> Double{
+        return price * quantity
+    }
+}
+
 class VC2: UIViewController {
   
     
     
-    var budget = 0
+    var budget = 0.0
     @IBOutlet weak var BurgerLabel: UILabel!
     @IBOutlet weak var PizzaLabel: UILabel!
     @IBOutlet weak var PotatoLabel: UILabel!
@@ -26,6 +36,14 @@ class VC2: UIViewController {
     var PotatoPrice = 1
     var BurgerPrice = 2
     var PizzaPrice = 2
+    
+    var items = [
+        Item(name: "Burger", price: 2.0),
+        Item(name: "Potato", price: 1.0),
+        Item(name: "Pizza", price: 2.0),
+        Item(name: "Water", price: 1.0),
+
+    ]
     // End Vairble
 
 
@@ -33,8 +51,20 @@ class VC2: UIViewController {
     
     @IBAction func Stepper(_ sender: UIStepper) {
         // Burger
+        let labels = [BurgerLabel, PotatoLabel, PizzaLabel, WaterLabel]
         
+        items[sender.tag].quantity = sender.value
+        labels[sender.tag]?.text = "\(items[sender.tag].quantity)"
         
+        var totalPrice = 0.0
+        for item in items{
+            totalPrice += item.totalPrice()
+        }
+        let remainingBudget = budget - totalPrice
+        RemainBudget.text = String(remainingBudget)
+        RemainBudget.textColor = remainingBudget >= 0 ? .black : .red
+        
+        /*
         BurgerLabel.text! = String(Int(sender.value))
         var allPrice = (Int(sender.value) * PizzaPrice)
         
@@ -44,13 +74,13 @@ class VC2: UIViewController {
             
             print(budget)
             RemainBudget.text = String(budget)
-
+*/
         }
 
         
         
         
-    }
+    //}
     @IBAction func Stepper2(_ sender: UIStepper) {
         // Potato
         
@@ -64,7 +94,7 @@ class VC2: UIViewController {
         
     }
     @IBAction func SetButton(_ sender: Any) {
-        budget = Int(TextFieldBudget.text!) ?? 0
+        budget = Double(TextFieldBudget.text!) ?? 0
         
         
         
