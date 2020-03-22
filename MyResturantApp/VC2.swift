@@ -63,6 +63,9 @@ class VC2: UIViewController {
         let remainingBudget = budget - totalPrice
         RemainBudget.text = String(remainingBudget)
         RemainBudget.textColor = remainingBudget >= 0 ? .black : .red
+       
+        
+        
         
         /*
         BurgerLabel.text! = String(Int(sender.value))
@@ -78,21 +81,7 @@ class VC2: UIViewController {
         }
 
         
-        
-        
-    //}
-    @IBAction func Stepper2(_ sender: UIStepper) {
-        // Potato
-        
-    }
-    @IBAction func Stepper3(_ sender: UIStepper) {
-        // Pizza
-        
-    }
-    @IBAction func Stepper4(_ sender: UIStepper) {
-        // Water
-        
-    }
+
     @IBAction func SetButton(_ sender: Any) {
         budget = Double(TextFieldBudget.text!) ?? 0
         
@@ -101,6 +90,19 @@ class VC2: UIViewController {
         RemainBudget.text! = String(budget)
         
    
+    }
+    
+    
+    func ALert(title : String , Massage : String) {
+        
+        let alert = UIAlertController(title: "\(title)", message: "\(Massage)", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK Ya Fandam 😕 ", style: .cancel, handler: nil)
+        
+        alert.addAction(alertAction)
+        
+        present(alert , animated: true , completion: nil)
+        
+        
     }
 //
 //
